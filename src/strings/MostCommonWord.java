@@ -1,9 +1,6 @@
 package strings;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -27,9 +24,12 @@ public class MostCommonWord {
 
     /**
      * 시도
-     * - 문장을 " "으로 나뉘어 단어집(?)을 만들고 banned에 포함되지 않는 단어를 카운트하여 가장 많이 나온 단어를 출력
+     * - 문장을 " "으로 나뉘어 단어집(?)을 만들고 banned에 포함되지 않는 단어를 카운트하여 정렬 후 앞에꺼 리턴
      * 풀이
-     * -
+     * - 정규식 \W == 문자열이 아닌 것, \w == 문자열인 것.
+     * 회고
+     * - 저런 좋은 정규식이...
+     * - 가장 큰 값을 찾는게 목적이므로 max를 쓰면 되었는데.. 굳이 정렬하는 코드를 고민 했음.
      * */
 
     public static String mostCommonWord(String paragraph, String[] banned) {
@@ -43,21 +43,14 @@ public class MostCommonWord {
             }
 
             var key = word.toLowerCase();
-            if (wordMap.containsKey(key)) {
-                wordMap.computeIfPresent(key, (k, v) -> v + 1);
-            } else {
-                wordMap.put(key, 1);
-            }
+            wordMap.put(key, wordMap.getOrDefault(key, 0) + 1);
         }
 
-        return wordMap.entrySet().stream()
-                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-                .findFirst()
-                .map(Map.Entry::getKey)
-                .orElse(null);
+        return Collections.max(wordMap.entrySet(), Map.Entry.comparingByValue()).getKey();
+
     }
 
     public static String clearMarks(String paragraph) {
-        return paragraph.replaceAll("[.,]", "");
+        return paragraph.replaceAll("\\W+", " ");
     }
 }

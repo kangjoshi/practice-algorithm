@@ -20,7 +20,9 @@ public class ReverseText {
         );
 
         for (char[] input : inputs) {
-            System.out.println("input: " + String.valueOf(input) + ", output : " + String.valueOf(reverse(input)));
+            System.out.print("input: " + String.valueOf(input));
+            reverse(input);
+            System.out.println(", reversed: " + String.valueOf(input));
         }
     }
 
@@ -28,9 +30,11 @@ public class ReverseText {
      * 시도
      * - 0 - n, 1 - n-1 과 같이 중간까지 문자열 스위칭
      * 풀이
-     * -
+     * - while(start < end)을 사용 start++, end-- start와 end가 중앙에서 만날 때 까지
+     * 회고
+     * - 새로운 인스턴스를 반환하는게 아닌 경우 void로 지정 해야 되느게 맞는거 같기도?
      * */
-    public static char[] reverse(final char [] input) {
+    public static void reverse(final char [] input) {
         var middle = input.length / 2;
         var end = input.length - 1;
 
@@ -40,8 +44,6 @@ public class ReverseText {
             input[end] = temp;
             end--;
         }
-
-        return input;
     }
 
 }
