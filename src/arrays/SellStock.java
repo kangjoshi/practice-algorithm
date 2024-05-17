@@ -6,17 +6,29 @@ package arrays;
  * 조건
  *  -
  * */
-
 public class SellStock {
 
     public static void main(String[] args) {
-        var input = new int[]{8, 1, 5, 3, 6, 4};
+        var prices = new int[]{8, 1, 5, 3, 6, 4};
+
+        var benefit = sellStock(prices);
+        System.out.println(benefit);
     }
 
     /**
      * 시도
-     * -
+     * - 작게 사서 비사게 판다.
      * 풀이
      * -
      * */
+    public static int sellStock(int[] prices) {
+        var buy = prices[0];
+        var benefit = Integer.MIN_VALUE;
+        for (var i = 1; i < prices.length; i++) {
+            benefit = Math.max(prices[i] - buy, benefit);
+            buy = Math.min(buy, prices[i]);
+        }
+        return benefit;
+    }
+
 }
