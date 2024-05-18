@@ -22,6 +22,8 @@ public class ArrayPartition {
      * 시도
      * - 정렬 후 홀수번째 값의 합을 구하면 될 것 같다.
      * 풀이
+     * - 시도와 동일
+     * 회고
      * -
      * */
     public static int arrayPairSum(int[] nums) {

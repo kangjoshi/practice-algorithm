@@ -19,7 +19,11 @@ public class SellStock {
      * 시도
      * - 작게 사서 비사게 판다.
      * 풀이
-     * -
+     * - 브루트 포스(완전 탐색): 풀이는 가능하지만 최후의 수단이 되어야..
+     * - 저점과 현재 값과의 차이 계산
+     *  - 시도와 동일
+     *  회고
+     *  - 잘 안풀릴 때는 문제를 그림으로 그려보자 해답에 좀 더 다가 갈 수 있을 것
      * */
     public static int sellStock(int[] prices) {
         var buy = prices[0];
