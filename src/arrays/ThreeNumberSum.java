@@ -15,7 +15,7 @@ public class ThreeNumberSum {
 
     /**
      * 시도
-     * - O(n2)는 일단 제외하고 해보자
+     * -
      * 풀이
      * -
      * */
