@@ -1,5 +1,7 @@
 package linked_list;
 
+import strings.Palindrome;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,27 +16,25 @@ import java.util.List;
 public class ReverseLinkedList1 {
 
     public static void main(String[] args) {
-        var numbers = new LinkedList<>(List.of(1, 2, 3, 4, 5, 6));
-        // 1 -> 2 -> 3 -> 4 -> 5 -> 6
+        var node = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
+        var reversed = reverse(node, null);
 
-        var reversed = reverse(numbers);
-
-        reversed.forEach(System.out::println);
+        reversed.printAll();
     }
 
     /**
      * 시도
-     * - pollLast 이용?
+     * - node가 알 수 있는 것?
+     *  - 다음 노드
      * 풀이
      * -
      * */
-    public static List<Integer> reverse(LinkedList<Integer> numbers) {
-        List<Integer> result = new ArrayList<>(numbers.size());
-
-        while (!numbers.isEmpty()) {
-            result.add(numbers.pollLast());
+    public static ListNode reverse(ListNode node, ListNode prev) {
+        if (node == null) {
+            return prev;
         }
-
-        return result;
+        var next = node.next;
+        node.next = prev;
+        return reverse(next, node);
     }
 }
