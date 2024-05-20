@@ -18,15 +18,24 @@ public class MergeTwoSortedList {
         // 1 -> 3 -> 4
         // = 1 -> 1 -> 2 -> 3 -> 4 -> 5
 
+        /*
+        *
+        * 1 -> 2 -> 5
+        * 1 -> 3 -> 4
+        *
+        * 1 -> 1 -> 3 -> 4
+        * */
+
         var node1 = new ListNode(1, new ListNode(2, new ListNode(3)));
         var node2 = new ListNode(1, new ListNode(3, new ListNode(4)));
 
         var merged = merge(node1, node2);
+        merged.printAll();
     }
 
     /**
      * 시도
-     * -
+     * - 재귀 호출하며 두 리스트를 비교
      * 풀이
      * -
      * 회고

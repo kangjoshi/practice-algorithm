@@ -24,10 +24,11 @@ public class ReverseLinkedList1 {
 
     /**
      * 시도
-     * - node가 알 수 있는 것?
-     *  - 다음 노드
+     * - 재귀 호출을 하며 노드 탐색
      * 풀이
      * -
+     * 회고
+     * - 역시 재귀 호출은 어렵다..
      * */
     public static ListNode reverse(ListNode node, ListNode prev) {
         if (node == null) {
