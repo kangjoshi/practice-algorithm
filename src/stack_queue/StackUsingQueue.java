@@ -1,6 +1,5 @@
-package stack;
+package stack_queue;
 
-import java.util.ArrayDeque;
 import java.util.LinkedList;
 import java.util.Queue;
 

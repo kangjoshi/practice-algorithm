@@ -17,7 +17,7 @@ public class ListNode {
     }
 
     public void print() {
-        System.out.println(val);
+        System.out.print(val + " ");
     }
 
     public void printAll() {
@@ -26,5 +26,6 @@ public class ListNode {
             n.print();
             n = n.next;
         }
+        System.out.println();
     }
 }

@@ -1,4 +1,4 @@
-package stack;
+package stack_queue;
 
 /**
  * 원형 큐 디자인

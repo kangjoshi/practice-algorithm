@@ -1,8 +1,7 @@
-package stack;
+package stack_queue;
 
 import java.util.ArrayDeque;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * 유효한 괄호
