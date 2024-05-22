@@ -1,5 +1,8 @@
 package hashtable;
 
+import java.util.NoSuchElementException;
+import java.util.Objects;
+
 /**
  * 해시맵 디자인
  * - 다음과 같은 기능을 제공하는 해시맵을 디자인하라
@@ -10,12 +13,34 @@ package hashtable;
 public class HashMap {
 
     public static void main(String[] args) {
+        var map = new MyHashMap<Integer, Integer>();
 
+        map.put(1, 1);
+        map.put(11, 1);
+        map.put(100001, 100001); // index 1 충돌
+        map.put(200001, 200001); // index 1 충돌
+
+        System.out.println(map.get(1)); // 1
+        System.out.println(map.get(100001)); // 100001
+        System.out.println(map.get(200001)); // 200001
+        System.out.println(map.get(300001)); // null
+
+
+        map.put(100001, 9999999);
+        System.out.println(map.get(100001)); // 9999999
+
+        map.remove(1);
+        System.out.println(map.get(1)); // null
+        map.remove(100001);
+        System.out.println(map.get(100001)); // null
+        System.out.println(map.get(200001)); // 100001
+
+        System.out.println();
     }
 
     /**
      * 시도
-     * -
+     * - 해시맵 구현
      * 풀이
      * -
      * */
@@ -39,13 +64,41 @@ public class HashMap {
          * 키, 값을 해시맵에 삽입, 이미 존재하는 키라면 업데이트
          * */
         public void put(K key, V value) {
-            var index = key.hashCode();
+            var index = key.hashCode() % nodes.length;
+
+            if (nodes[index] == null) {
+                nodes[index] = new Node(key, value);
+                return;
+            }
+
+            var node = nodes[index];
+            while (node.next != null) {
+                if (node.key.equals(key)) {
+                    node.value = value;
+                    return;
+                }
+                node = node.next;
+            }
+            node.next = new Node(key, value);
         }
 
         /**
          * 키에 해당하는 값을 조회, 키가 존재하지 않는다면 -1 리턴
          * */
         public V get(K key) {
+            var index = key.hashCode() % nodes.length;
+
+            if (nodes[index] == null) {
+                return null;
+            }
+
+            var node = nodes[index];
+            while (node != null) {
+                if (node.key.equals(key)) {
+                    return (V) node.value;
+                }
+                node = node.next;
+            }
             return null;
         }
 
@@ -53,7 +106,27 @@ public class HashMap {
          * 키에 해당하는 키, 값을 해시맵에서 삭제
          * */
         public void remove(K key) {
+            var index = key.hashCode() % nodes.length;
 
+            if (nodes[index] == null) {
+                return;
+            }
+
+            var node = nodes[index];
+            Node<K, V> prev = null;
+            while (node != null) {
+                if (node.key.equals(key)) {
+                    if (prev != null) {
+                        prev.next = node.next;
+                        return;
+                    } else {
+                        nodes[index] = node.next;
+                        return;
+                    }
+                }
+                prev = node;
+                node = node.next;
+            }
         }
 
         /**

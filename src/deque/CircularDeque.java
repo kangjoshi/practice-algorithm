@@ -12,7 +12,6 @@ public class CircularDeque {
     public static void main(String[] args) {
 
     }
-
     /**
      * 시도
      * -
@@ -21,8 +20,10 @@ public class CircularDeque {
      * */
     static class MyCircularDeque<E> {
 
-        MyCircularDeque(int size) {
+        int head, tail, size;
 
+        MyCircularDeque(int size) {
+            this.size = size;
         }
 
         /**
@@ -81,6 +82,4 @@ public class CircularDeque {
             return true;
         }
     }
-
-
 }
