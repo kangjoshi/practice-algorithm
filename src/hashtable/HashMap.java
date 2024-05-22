@@ -16,25 +16,14 @@ public class HashMap {
         var map = new MyHashMap<Integer, Integer>();
 
         map.put(1, 1);
-        map.put(11, 1);
-        map.put(100001, 100001); // index 1 충돌
-        map.put(200001, 200001); // index 1 충돌
+        map.put(2, 2);
 
-        System.out.println(map.get(1)); // 1
-        System.out.println(map.get(100001)); // 100001
-        System.out.println(map.get(200001)); // 200001
-        System.out.println(map.get(300001)); // null
+        map.put(2, 1);
+        System.out.println(map.get(2)); // 1
 
-
-        map.put(100001, 9999999);
-        System.out.println(map.get(100001)); // 9999999
-
-        map.remove(1);
-        System.out.println(map.get(1)); // null
-        map.remove(100001);
-        System.out.println(map.get(100001)); // null
-        System.out.println(map.get(200001)); // 100001
-
+        System.out.println(map.get(2));
+        map.remove(2);
+        System.out.println(map.get(2));
         System.out.println();
     }
 
@@ -43,6 +32,8 @@ public class HashMap {
      * - 해시맵 구현
      * 풀이
      * -
+     * 회고
+     * - 경계에 대한 테스트 코드 보강 필요..
      * */
     static class MyHashMap<K, V> {
 
@@ -72,14 +63,16 @@ public class HashMap {
             }
 
             var node = nodes[index];
-            while (node.next != null) {
+            Node prev = null;
+            while (node != null) {
                 if (node.key.equals(key)) {
                     node.value = value;
                     return;
                 }
+                prev = node;
                 node = node.next;
             }
-            node.next = new Node(key, value);
+            prev.next = new Node(key, value);
         }
 
         /**

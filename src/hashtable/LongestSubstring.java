@@ -13,14 +13,13 @@ import java.util.Set;
 public class LongestSubstring {
 
     public static void main(String[] args) {
-        var input = "abcabcbbc"; // abc 3
+        var input = "dvdf"; // abc 3
 
         var charArray = input.toCharArray();
         var set = new HashSet<Character>(charArray.length);
 
         var maxLength = Integer.MIN_VALUE;
         for (int i = 0; i < charArray.length; i++) {
-
             if (set.contains(charArray[i])) {
                 maxLength = Math.max(set.size(), maxLength);
                 set.clear();
@@ -36,5 +35,7 @@ public class LongestSubstring {
      * - 순회하면서 한글자씩 set에 입력, set에 존재하는 문자열을 만나면 해당 사이즈를 길이로 기록, 사이즈를 비교하며 가장 큰 길이를 반환
      * 풀이
      * -
+     * 회고
+     * - 정답 틀림.
      * */
 }

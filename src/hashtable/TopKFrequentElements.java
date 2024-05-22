@@ -28,10 +28,10 @@ public class TopKFrequentElements {
                 .map(Map.Entry::getKey)
                 .toList();
 
+        var result = new int[k];
         for (int i = 0; i < k; i++) {
-            System.out.println(rank.get(i));
+            result[i] = rank.get(i);
         }
-        // [1, 2]
     }
 
     /**
@@ -39,5 +39,7 @@ public class TopKFrequentElements {
      * - 순회하면서 map에 빈도 기록, 정렬 후 k 만큼 출력
      * 풀이
      * -
+     * 회고
+     * - 속도 느림. 개선 필요
      * */
 }
