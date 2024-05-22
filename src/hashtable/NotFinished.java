@@ -1,6 +1,8 @@
 package hashtable;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 완주하지 못한 선수
@@ -12,15 +14,22 @@ import java.util.List;
 public class NotFinished {
 
     public static void main(String[] args) {
-        var participant = List.of("leo", "kiki", "eden");
-        var completion = List.of("eden", "kiki");
+        var participants = List.of("leo", "kiki", "eden");
+        var completion = Set.of("eden", "kiki");
 
-        // leo
+        var notFinished = new ArrayList<>(participants.size() - completion.size());
+        for (String participant : participants) {
+            if (!completion.contains(participant)) {
+                notFinished.add(participant);
+            }
+        }
+
+        System.out.println(notFinished);
     }
 
     /**
      * 시도
-     * -
+     * - 참가자를 순회 하며 완주하지 못한 사람을 출력
      * 풀이
      * -
      * */
