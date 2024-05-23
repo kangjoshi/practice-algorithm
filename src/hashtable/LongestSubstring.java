@@ -14,6 +14,7 @@ public class LongestSubstring {
 
     public static void main(String[] args) {
         var input = "dvdf"; // abc 3
+        // abcabcabaa
 
         var charArray = input.toCharArray();
         var set = new HashSet<Character>(charArray.length);
