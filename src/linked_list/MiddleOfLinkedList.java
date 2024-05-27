@@ -10,12 +10,12 @@ package linked_list;
 public class MiddleOfLinkedList {
 
     public static void main(String[] args) {
-        //var node = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
+        var node = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
         // 3
-        var node = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5, new ListNode(6))))));
+        //var node = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5, new ListNode(6))))));
         // 4
 
-        var middle = middleNode(node);
+        var middle = middleNode2(node);
 
         System.out.println(middle.val);
     }
@@ -30,6 +30,7 @@ public class MiddleOfLinkedList {
      * -
      * 회고
      * - 좀 더 우하한 방법이 있을 것 같은데.. 투 포인터?
+     * - 투 포인터 알고리즘 다양한 응용 버전이 있는 것 같다..
      * */
     // 무식하게 풀어보기
     public static ListNode middleNode(ListNode head) {
@@ -49,4 +50,17 @@ public class MiddleOfLinkedList {
 
         return node;
     }
+
+    public static ListNode middleNode2(ListNode head) {
+        var slow = head;
+        var fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;       // 1칸씩 이동
+            fast = fast.next.next;  // 2칸씩 이동
+        }
+
+        return slow;
+    }
+
 }
