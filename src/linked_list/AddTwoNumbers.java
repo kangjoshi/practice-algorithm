@@ -22,9 +22,12 @@ public class AddTwoNumbers {
         var result = sum(numbers1, numbers2);
         result.forEach(System.out::print);*/
 
-        var node1 = new ListNode(9, new ListNode(9, new ListNode(3)));
-        var node2 = new ListNode(1, new ListNode(9, new ListNode(5)));
-        //var node2 = new ListNode(5, new ListNode(6));
+        //var node1 = new ListNode(2, new ListNode(4, new ListNode(3)));
+        //var node2 = new ListNode(5, new ListNode(6, new ListNode(4)));
+
+
+        var node1 = new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9)))))));
+        var node2 = new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9))));
 
         var sum = sum(node1, node2);
         sum.printAll();
@@ -56,15 +59,29 @@ public class AddTwoNumbers {
     /**
      * 시도
      * - 두 자리수를 더해서 신규 노드로 만든다.
-     * - 신규 노드를 순회하며 10 이상이라면 나머지로 처리하고 이후 자리를 올림 처리를 하면서 뒤집는다
+     * - 신규 노드를 순회하며 10 이상이라면 나머지로 처리하고 이후 자리를 올림 처리
      * 풀이
      * -
+     * 회고
+     * - 속도를 조금 더 개선할 수 있는 방법?
+     * - 문제를 잘 읽어야겠다..
      * */
     public static ListNode sum(ListNode node1, ListNode node2) {
         ListNode result = null;
         ListNode prev = null;
+        var carry = false;
         while (node1 != null || node2 != null) {
             var sum = sumTwoNode(node1, node2);
+
+            if (carry) {
+                sum += 1;
+                carry = false;
+            }
+
+            if (sum >= 10) {
+                sum %= 10;
+                carry = true;
+            }
 
             if (result == null) {
                 result = new ListNode(sum);
@@ -78,39 +95,17 @@ public class AddTwoNumbers {
             if (node1 != null) {
                 node1 = node1.next;
             }
-
             if (node2 != null) {
                 node2 = node2.next;
             }
         }
 
-        prev = null;
-        var carry = false;
-        while (result != null) {
-            var next = result.next;
-
-            result.next = prev;
-            prev = result;
-
-            if (carry) {
-                result.val += 1;
-                carry = false;
-            }
-
-            if (prev.val >= 10) {
-                carry = true;
-                prev.val = prev.val % 10;
-            }
-            result = next;
-        }
-
         if (carry) {
-            return new ListNode(1, prev);
+            prev.next = new ListNode(1);
         }
 
-        return prev;
+        return result;
     }
-
 
     public static int sumTwoNode(ListNode node1, ListNode node2) {
         return getValueOrZero(node1) + getValueOrZero(node2);
