@@ -22,12 +22,12 @@ public class AddTwoNumbers {
         var result = sum(numbers1, numbers2);
         result.forEach(System.out::print);*/
 
-        //var node1 = new ListNode(2, new ListNode(4, new ListNode(3)));
-        //var node2 = new ListNode(5, new ListNode(6, new ListNode(4)));
+        var node1 = new ListNode(2, new ListNode(4, new ListNode(3)));
+        var node2 = new ListNode(5, new ListNode(6, new ListNode(4)));
 
 
-        var node1 = new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9)))))));
-        var node2 = new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9))));
+        //var node1 = new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9)))))));
+        //var node2 = new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9))));
 
         var sum = sum(node1, node2);
         sum.printAll();
@@ -69,19 +69,13 @@ public class AddTwoNumbers {
     public static ListNode sum(ListNode node1, ListNode node2) {
         ListNode result = null;
         ListNode prev = null;
-        var carry = false;
+        int carry = 0;
+
         while (node1 != null || node2 != null) {
-            var sum = sumTwoNode(node1, node2);
+            var sum = sumTwoNode(node1, node2) + carry;
 
-            if (carry) {
-                sum += 1;
-                carry = false;
-            }
-
-            if (sum >= 10) {
-                sum %= 10;
-                carry = true;
-            }
+            carry = sum / 10;
+            sum = sum % 10;
 
             if (result == null) {
                 result = new ListNode(sum);
@@ -100,8 +94,8 @@ public class AddTwoNumbers {
             }
         }
 
-        if (carry) {
-            prev.next = new ListNode(1);
+        if (carry > 0) {
+            prev.next = new ListNode(carry);
         }
 
         return result;
