@@ -1,5 +1,6 @@
 package hashtable;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,28 +16,36 @@ public class LongestSubstring {
     public static void main(String[] args) {
         var input = "dvdf"; // abc 3
         // abcabcabaa
+        // dvdf
 
-        var charArray = input.toCharArray();
-        var set = new HashSet<Character>(charArray.length);
+        var left = 0;
+        var right = 0;
+        var maxLength = 0;
+        var used = new HashMap<Character, Integer>(input.length());
 
-        var maxLength = Integer.MIN_VALUE;
-        for (int i = 0; i < charArray.length; i++) {
-            if (set.contains(charArray[i])) {
-                maxLength = Math.max(set.size(), maxLength);
-                set.clear();
+        for (char c : input.toCharArray()) {
+            // 중복 값이 있다면 값의 위치에서 한칸 이동
+            if (used.containsKey(c) && left <= used.get(c)) {
+                left = used.get(c) + 1;
+            // 등장하지 않았던 문자라면 maxLength를 업데이트
+            } else {
+                maxLength = Math.max(maxLength, right - left + 1);
             }
-            set.add(charArray[i]);
+
+            used.put(c, right);
+            right++;
         }
-        maxLength = Math.max(maxLength, set.size());
+
         System.out.println(maxLength);
     }
 
     /**
      * 시도
-     * - 순회하면서 한글자씩 set에 입력, set에 존재하는 문자열을 만나면 해당 사이즈를 길이로 기록, 사이즈를 비교하며 가장 큰 길이를 반환
+     *
      * 풀이
-     * -
+     * - 슬라이딩 윈도우
      * 회고
-     * - 정답 틀림.
+     * - 풀이 최종 결과 틀린 결과 였음.
+     * - 슬라이딩 윈도우 처음 들어 보는데 이것도 흡수 하자!!..
      * */
 }
