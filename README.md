@@ -10,6 +10,7 @@
   - [X] 그룹 애너그램
   - [X] 가장 긴 팰린드롬  부분 문자열
   - [X] Reverse Prefix of Word
+  - [X] Optimal Partition of String
 - Array
   - [X] 두 수의 합
   - [ ] 세 수의 합
@@ -17,6 +18,7 @@
   - [X] 자신을 제외한 배열의 곱
   - [X] 주식을 사고팔기 가장 좋은 시점
   - [ ] 빗물 트래핑
+  - [X] Decode XORed Array
 - Linked List
   - [X] 팰린드롬 연결 리스트
   - [X] 두 정렬 리스트의 병합
