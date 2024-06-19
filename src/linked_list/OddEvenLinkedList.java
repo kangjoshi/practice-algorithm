@@ -18,38 +18,42 @@ public class OddEvenLinkedList {
     public static void main(String[] args) {
         // 1 -> 2 -> 3 -> 4 -> 5 -> 6
         // 1 -> 3 -> 5 -> 2 -> 4 -> 6
-        var numbers = new LinkedList<>(List.of(1, 2, 3, 4, 5, 6));
 
-        var result = oddEven(numbers);
+        var node = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5, new ListNode(6))))));
+        var result = oddEven(node);
 
-        result.forEach(System.out::print);
+        System.out.println();
     }
 
     /**
      * 시도
-     * - 홀짝 판단 %2하여 나머지 여부로 확인
-     * - 공간 복잡도 O(1)은 신규 배열 생성 없이, 시간 복잡도 O(n)은 중첩된 for문 없이 해결.
+     * - 비교하면서 앞수가 짝수면서 뒷수가 홀수라면 뒤집기
      * 풀이
      * -
      * */
-    public static List<Integer> oddEven(LinkedList<Integer> numbers) {
-        // 일단 공간 복잡도는 생각하지 말고 해보자..
-        var result = new LinkedList<Integer>(); // 이 부분이 문제가 될 것 같음?
+    public static ListNode oddEven(ListNode head) {
+        var dummy = new ListNode(0, head);
 
-        var oddIndex = 0;
-        while (!numbers.isEmpty()) {
-            var number = numbers.poll();
-            if (isOdd(number)) {
-                result.add(oddIndex, number);
-                oddIndex++;
-            } else {
-                result.addLast(number);
+        var current = dummy.next;
+        while (current.next != null) {
+            var left = current;
+            var right = current.next;
+
+            if (isEven(left) && isOdd(right)) {
+                current = right;
+                current.next = left;
             }
+
+            current = current.next;
         }
-        return result;
+
+
+        return dummy.next;
     }
 
-    public static boolean isOdd(int number) {
-        return number % 2 == 1;
+    public static boolean isOdd(ListNode node) {
+        return node.val % 2 == 1;
     }
+
+    public static boolean isEven(ListNode node) { return !isOdd(node); }
 }
