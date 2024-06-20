@@ -26,6 +26,9 @@ public class Permulations {
         *  Output: [[0,1],[1,0]]
         * */
         List<List<Integer>> result = new ArrayList<>();
+
+
+
     }
 
     /**
@@ -38,4 +41,27 @@ public class Permulations {
      * 회고
      * - 드디어 순열 문제..
      * */
+
+    public void dfs(List<List<Integer>> results, List<Integer> prevElements, List<Integer> elements) {
+        // nextElements가 없다면 (리프 노드에 도달 했다면) 결과에 추가
+        if (elements.isEmpty()) {
+            results.add(prevElements.stream().toList());
+        }
+
+        // 전달 받은 엘리먼트를 모두 탐색
+        for (Integer e : elements) {
+            // 전달 받은 엘리먼트에서 현재 엘리먼트를 제외하고 구성
+            var nextElements = new ArrayList<>(elements);
+            nextElements.remove(e);
+
+            // 기존 값에 현재 엘리먼트 추가
+            prevElements.add(e);
+
+            dfs(results, prevElements, nextElements);
+            // 돌아온 이후에는 preElements에서 현재 엘리먼트 삭제
+            prevElements.remove(e);
+        }
+
+    }
+
 }
