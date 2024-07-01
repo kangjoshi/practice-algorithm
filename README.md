@@ -54,3 +54,4 @@
 - DFS
   - [X] [EvaluateBooleanBinaryTree.java](src%2Fdepth_first_search%2FEvaluateBooleanBinaryTree.java)
   - [X] [RangeSumOfBST.java](src%2Fdepth_first_search%2FRangeSumOfBST.java)
+  - [X] [InvertBinaryTree.java](src%2Fdepth_first_search%2FInvertBinaryTree.java)
