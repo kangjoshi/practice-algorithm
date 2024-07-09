@@ -1,6 +1,7 @@
 package graph;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -27,7 +28,9 @@ public class Permulations {
         * */
         List<List<Integer>> result = new ArrayList<>();
 
+        dfs(result, new ArrayList<>(), Arrays.stream(numbers).boxed().toList());
 
+        System.out.println();
 
     }
 
@@ -40,28 +43,27 @@ public class Permulations {
      * -
      * 회고
      * - 드디어 순열 문제..
+     * - 이해 하는데 어렵다...
      * */
 
-    public void dfs(List<List<Integer>> results, List<Integer> prevElements, List<Integer> elements) {
-        // nextElements가 없다면 (리프 노드에 도달 했다면) 결과에 추가
+    public static void dfs(List<List<Integer>> results, List<Integer> prevElements, List<Integer> elements) {
+        // nextElements가 없다면 == 리프 노드에 도달 했다면
         if (elements.isEmpty()) {
-            results.add(prevElements.stream().toList());
+            results.add(prevElements.stream().toList()); // 지나온 노드들을 결과에 추가
         }
 
-        // 전달 받은 엘리먼트를 모두 탐색
+        // 남은 모든 노드를 탐색
         for (Integer e : elements) {
-            // 전달 받은 엘리먼트에서 현재 엘리먼트를 제외하고 구성
+            // 전달 받은 엘리먼트에서 현재 엘리먼트 제외 next Elements 새로 구성
             var nextElements = new ArrayList<>(elements);
             nextElements.remove(e);
 
-            // 기존 값에 현재 엘리먼트 추가
+            // prevElements에 현재 값 추가
             prevElements.add(e);
-
             dfs(results, prevElements, nextElements);
-            // 돌아온 이후에는 preElements에서 현재 엘리먼트 삭제
+            // 돌아온 이후 prevElements에서 현재 값 삭제
             prevElements.remove(e);
         }
-
     }
 
 }
